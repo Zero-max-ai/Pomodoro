@@ -1,0 +1,68 @@
+<!-- SESSION CONTROLS -->
+<div class="flex flex-col items-center gap-4 mt-5">
+    <!-- Title -->
+    <span class="manrope-font font-black text-lg">Sessions</span>
+
+    <!-- Buttons + Session Count -->
+    <div class="flex items-center gap-4">
+        <!-- Decrease Button -->
+        <button
+            id="decreaseSession"
+            class="w-10 h-10 flex items-center justify-center rounded-xl bg-white border-2 border-neutral-900
+                   shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000] active:shadow-none
+                   active:translate-x-1 active:translate-y-1 manrope-font text-xl cursor-pointer"
+        >
+            -
+        </button>
+
+        <!-- Session Number Display -->
+        <div
+            id="sessionDisplay"
+            class="manrope-font font-bold text-base px-6 py-3 border-2 border-neutral-900
+                   shadow-[4px_4px_0_#000] rounded-xl bg-white text-center"
+        >
+            Session: <span id="currentSession"></span>/<span id="totalSessions"
+            ></span>
+        </div>
+
+        <!-- Increase Button -->
+        <button
+            id="increaseSession"
+            class="w-10 h-10 flex items-center justify-center rounded-xl bg-white border-2 border-neutral-900
+                   shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000] active:shadow-none
+                   active:translate-x-1 active:translate-y-1 manrope-font text-xl cursor-pointer"
+        >
+            +
+        </button>
+    </div>
+</div>
+
+<script>
+    let totalSessions = 3;
+    let currentSession = 0;
+
+    const totalEl = document.getElementById('totalSessions');
+    const currentEl = document.getElementById('currentSession');
+    const incBtn = document.getElementById('increaseSession');
+    const decBtn = document.getElementById('decreaseSession');
+
+    function updateSessionUI() {
+        if (!totalEl || !currentEl) return;
+        totalEl.textContent = `${totalSessions}`;
+        currentEl.textContent = `${currentSession}`;
+    }
+
+    incBtn?.addEventListener('click', () => {
+        totalSessions++;
+        updateSessionUI();
+    });
+
+    decBtn?.addEventListener('click', () => {
+        if (totalSessions > 1) {
+            totalSessions--;
+            if (currentSession > totalSessions) currentSession = totalSessions;
+            updateSessionUI();
+        }
+    });
+    updateSessionUI();
+</script>

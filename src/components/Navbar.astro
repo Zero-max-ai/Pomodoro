@@ -1,13 +1,49 @@
-<nav
+<!-- <nav
     id="navbar"
     class="flex items-center py-2 px-10 fixed w-fit rounded-full shadow top-3 left-1/2 -translate-x-1/2 backdrop-blur-lg"
 >
-    <span class="manrope-font font-extrabold">Pomodoro Focus Timer</span>
-    <!-- <span class="manrope-font font-extrabold ml-20 px-3 rounded-full">
+    <span class="manrope-font font-extrabold">Pomodoro Focus Timer</span> --><!-- <span class="manrope-font font-extrabold ml-20 px-3 rounded-full">
     Install
-  </span> -->
-</nav>
-
-<!-- 
+  </span> --><!-- </nav> --><!-- 
     add button in Install.
 -->
+<nav
+  id="navbar"
+  class="flex items-center justify-between gap-8 px-10 py-3 fixed top-3 left-1/2 -translate-x-1/2
+         bg-white border-2 border-neutral-900 shadow-[6px_6px_0_#000] rounded-full"
+>
+  <span class="manrope-font font-black text-lg">
+    Pomodoro Focus Timer
+  </span>
+
+  <div class="flex items-center gap-3">
+    <!-- Install Button -->
+    <button
+      class="manrope-font px-4 py-2 text-sm font-semibold bg-neutral-900 text-white rounded-full
+             shadow-[3px_3px_0_#000] hover:shadow-[1px_1px_0_#000] active:shadow-none 
+             active:translate-x-1 active:translate-y-1 transition-all cursor-pointer"
+    >
+      Install
+    </button>
+
+    <!-- Settings Button -->
+    <button
+      id="settings-btn"
+      class="p-2 rounded-full bg-white border-2 border-neutral-900 shadow-[3px_3px_0_#000]
+             hover:shadow-[1px_1px_0_#000] active:shadow-none active:translate-x-1 active:translate-y-1
+             transition-all cursor-pointer flex items-center justify-center"
+    >
+      <span class="material-symbols-outlined text-neutral-900 text-xl">settings</span>
+    </button>
+
+    <!-- theme button -->
+    <button
+      id="settings-btn"
+      class="p-2 rounded-full bg-white border-2 border-neutral-900 shadow-[3px_3px_0_#000]
+             hover:shadow-[1px_1px_0_#000] active:shadow-none active:translate-x-1 active:translate-y-1
+             transition-all cursor-pointer flex items-center justify-center"
+    >
+      <span class="material-symbols-outlined text-neutral-900 text-xl">bedtime</span>
+    </button>
+  </div>
+</nav>
