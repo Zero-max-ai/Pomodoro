@@ -1,35 +1,39 @@
 ---
-import "../styles/global.css";
+import '../styles/global.css';
 
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 
-import Home from "../screens/Home.astro";
+import Home from '../screens/Home.astro';
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- google fonts links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
-      rel="stylesheet"
-    />
-    <!-- font links end -->
+        <!-- google fonts links start -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- google font links end -->
 
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Pomodoro</title>
-  </head>
-  <body>
-    <Navbar />
-    <main class="">
-      <Home />
-    </main>
-    <Footer />
-  </body>
+        <!-- google icons links start -->
+         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1" rel="stylesheet" />
+        <!-- google icons links end -->
+
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Pomodoro</title>
+    </head>
+    <body>
+        <Navbar />
+        <main class="max-w-full overflow-hidden py-36">
+            <Home />
+        </main>
+        <Footer />
+    </body>
 </html>

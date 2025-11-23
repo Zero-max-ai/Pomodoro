@@ -1,0 +1,18 @@
+<div class="flex items-start gap-3 px-5 py-4 bg-neutral-50 border border-neutral-200 rounded-xl shadow-sm">
+  <span class="material-symbols-outlined text-neutral-500">info</span>
+  <div>
+    <span class="text-xs uppercase tracking-wide text-neutral-500">Note</span>
+    <p id="quote" class="mt-1 font-medium text-neutral-900"></p>
+  </div>
+</div>
+
+
+<script>
+    import { quoteFetcher } from '../stores/quote';
+    const quoteEl = document.getElementById('quote');
+    (async () => {
+        if (!quoteEl) return;
+        const quote = quoteFetcher();
+        quoteEl.textContent = `${quote}`;
+    })();
+</script>

@@ -1,0 +1,120 @@
+<div class="flex items-center justify-center gap-12 mt-12">
+    <button
+        id="start"
+        class="p-6 rounded-2xl border border-pink-300 bg-white shadow-[4px_4px_0_#f9a8d4] hover:shadow-[2px_2px_0_#f9a8d4] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+    >
+        <span class="material-symbols-outlined text-7xl text-pink-600"
+            >play_circle</span
+        >
+    </button>
+
+    <button
+        id="pause"
+        class="hidden p-6 rounded-2xl border border-pink-300 bg-white shadow-[4px_4px_0_#f9a8d4] hover:shadow-[2px_2px_0_#f9a8d4] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+    >
+        <span class="material-symbols-outlined text-7xl text-pink-600"
+            >pause_circle</span
+        >
+    </button>
+
+    <button
+        id="reset"
+        class="hidden p-6 rounded-2xl border border-gray-300 bg-white shadow-[4px_4px_0_#d1d5db] hover:shadow-[2px_2px_0_#d1d5db] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+    >
+        <span class="material-symbols-outlined text-6xl text-gray-500"
+            >replay</span
+        >
+    </button>
+</div>
+
+<!-- <div
+    class="manrope-font font-semibold text-sm flex items-center justify-center gap-10"
+>
+    <button
+        id="start"
+        class="px-3 py-2 pt-3 shadow rounded-full bg-pink-200/20 hover:bg-pink-200/70 focus:hover:bg-pink-200/70cd cursor-pointer"
+    >
+        <span class="material-symbols-outlined"> play_circle </span>
+    </button>
+    <button
+        id="pause"
+        class="px-3 py-2 pt-3 shadow rounded-full bg-pink-200/20 hover:bg-pink-200/70 focus:hover:bg-pink-200/70cd cursor-pointer"
+    >
+        <span class="material-symbols-outlined"> pause_circle </span>
+    </button>
+    <button
+        id="reset"
+        class="px-3 py-2 pt-3 shadow rounded-full bg-pink-200/20 hover:bg-pink-200/70 focus:hover:bg-pink-200/70cd cursor-pointer"
+    >
+        <span class="material-symbols-outlined"> replay </span>
+    </button>
+    <button
+        id="settings"
+        class="px-3 py-2 pt-3 shadow rounded-full bg-pink-200/20 hover:bg-pink-200/70 focus:hover:bg-pink-200/70cd cursor-pointer"
+    >
+        <span class="material-symbols-outlined"> settings </span>
+    </button>
+</div> -->
+
+<script>
+    import {
+        isRunning,
+        pauseWorkTimer,
+        resetWorkTimer,
+        startWorkTimer,
+        workTimer,
+    } from '../stores/timer';
+
+    const timerEl = document.getElementById('timer') as HTMLElement | null;
+    const startEl = document.getElementById('start') as HTMLElement | null;
+    const pauseEl = document.getElementById('pause') as HTMLElement | null;
+    const resetEl = document.getElementById('reset') as HTMLElement | null;
+
+    const updateBtns = () => {
+        const running = isRunning.get();
+        const hasStarted = workTimer.get();
+
+        if (running) {
+            startEl?.classList.add('hidden');
+            pauseEl?.classList.remove('hidden');
+            resetEl?.classList.remove('hidden');
+        } else if (hasStarted) {
+            startEl?.classList.remove('hidden');
+            pauseEl?.classList.add('hidden');
+            resetEl?.classList.remove('hidden');
+        } else {
+            startEl?.classList.remove('hidden');
+            pauseEl?.classList.add('hidden');
+            resetEl?.classList.add('hidden');
+        }
+    };
+
+    function updateUI(seconds: number) {
+        if (!timerEl) return;
+
+        const min = Math.floor(seconds / 60)
+            .toString()
+            .padStart(2, '0');
+        const sec = (seconds % 60).toString().padStart(2, '0');
+        timerEl.textContent = `${min} : ${sec}`;
+    }
+
+    isRunning.subscribe(updateBtns);
+    workTimer.subscribe(updateBtns);
+    workTimer.subscribe(updateUI);
+    updateUI(workTimer.get());
+
+    startEl?.addEventListener('click', () => {
+        startWorkTimer();
+    });
+
+    pauseEl?.addEventListener('click', () => {
+        pauseWorkTimer();
+    });
+
+    resetEl?.addEventListener('click', () => {
+        resetWorkTimer();
+    });
+
+    updateBtns();
+</script>

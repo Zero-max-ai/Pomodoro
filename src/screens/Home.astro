@@ -1,72 +1,24 @@
 ---
-import "../stores/timer.js";
+import Quote from '../components/Quote.astro';
+import Timer from '../components/Timer.astro';
+import FeatureBtn from '../components/FeatureBtn.astro';
+// import WorkSession from '../components/WorkSession.astro';
+import '../stores/timer.js';
 ---
 
-<div class="flex flex-col items-center justify-center h-[90vh] gap-10">
-  <!-- timer -->
-  <div class="manrope-font font-extrabold text-5xl" id="timer">25 : 00</div>
+<div class="flex flex-col items-center justify-center gap-10">
+    <!-- timer -->
+    <Timer />
 
-  <!-- work sessions -->
-  <div class="flex flex-col items-center justify-center gap-2">
-    <span class="manrope-font font-bold">Work Sessions</span>
+    <!-- time being we have removed the work sessions for now! -->
+    <!-- work sessions -->
+    <!-- <WorkSession /> -->
 
-    <div class="manrope-font text-xl flex items-center justify-between gap-3">
-      <div class="px-3 py-1 shadow rounded-full">-</div>
-      <span class="">0 / 2</span>
-      <div class="px-3 py-1 shadow rounded-full">+</div>
-    </div>
-  </div>
+    <!-- features btns -->
+    <FeatureBtn />
 
-  <!-- features btns -->
-  <div
-    class="manrope-font font-semibold text-sm flex items-center justify-center gap-10"
-  >
-    <span id="start" class="">Start</span>
-    <span id="pause" class="">Pause</span>
-    <span id="reset" class="">Reset</span>
-    <span class="">Settings</span>
-  </div>
+    <!-- random quick tips -->
+    <Quote />
 
-  <!-- random quick tips -->
-  <div class="border px-5 py-1">
-    Note:{" "}<span>Drink water during breaks</span>
-  </div>
-
-  <!-- single ad banner loc -->
+    <!-- single ad banner loc -->
 </div>
-
-<script>
-  import {
-    workTimer,
-    startWorkTimer,
-    pauseWorkTimer,
-    resetWorkTimer,
-  } from "../stores/timer";
-
-  const timerEl = document.getElementById("timer") as HTMLElement | null;
-
-  function updateUI(seconds: number) {
-    if (!timerEl) return;
-
-    const min = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const sec = (seconds % 60).toString().padStart(2, "0");
-    timerEl.textContent = `${min} : ${sec}`;
-  }
-
-  workTimer.subscribe(updateUI);
-  updateUI(workTimer.get());
-
-  document.getElementById("start")?.addEventListener("click", () => {
-    startWorkTimer();
-  });
-
-  document.getElementById("pause")?.addEventListener("click", () => {
-    pauseWorkTimer();
-  });
-
-  document.getElementById("reset")?.addEventListener("click", () => {
-    resetWorkTimer();
-  });
-</script>
