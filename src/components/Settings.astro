@@ -1,0 +1,58 @@
+---
+const { open } = Astro.props;
+---
+
+<div
+    class={`fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all z-50 ${
+        open
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+    }`}
+>
+    <div
+        class="bg-white border-2 border-neutral-900 shadow-[8px_8px_0_#000] rounded-2xl p-8 w-[90%] max-w-md"
+    >
+        <h2 class="manrope-font font-black text-2xl mb-4">Settings</h2>
+
+        <div class="flex flex-col gap-4 manrope-font">
+            <div class="flex justify-between items-center">
+                <span class="font-semibold">Work Duration</span>
+                <input
+                    type="number"
+                    min="1"
+                    max="60"
+                    class="border-2 border-neutral-900 rounded px-3 py-1 w-20 shadow-[3px_3px_0_#000]"
+                />
+            </div>
+
+            <div class="flex justify-between items-center">
+                <span class="font-semibold">Break Duration</span>
+                <input
+                    type="number"
+                    min="1"
+                    max="30"
+                    class="border-2 border-neutral-900 rounded px-3 py-1 w-20 shadow-[3px_3px_0_#000]"
+                />
+            </div>
+
+            <div class="flex justify-between items-center">
+                <span class="font-semibold">Sessions</span>
+                <input
+                    type="number"
+                    min="1"
+                    max="10"
+                    class="border-2 border-neutral-900 rounded px-3 py-1 w-20 shadow-[3px_3px_0_#000]"
+                />
+            </div>
+        </div>
+
+        <button
+            id="closeSettings"
+            class="mt-6 px-4 py-2 bg-neutral-900 text-white manrope-font rounded-full border-2 border-neutral-900
+             shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000] active:shadow-none
+             active:translate-x-1 active:translate-y-1 transition-all"
+        >
+            Close
+        </button>
+    </div>
+</div>

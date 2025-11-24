@@ -1,0 +1,44 @@
+---
+import '../styles/global.css'; // optional if you have global styles
+---
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Page Not Found</title>
+    </head>
+
+    <body class="bg-white min-h-screen flex items-center justify-center">
+        <div class="flex flex-col items-center text-center px-8">
+            <!-- Big 404 Box -->
+            <div
+                class="px-12 py-8 border-4 border-neutral-900 rounded-2xl
+               shadow-[10px_10px_0_#000] bg-white"
+            >
+                <h1 class="manrope-font font-black text-7xl">404</h1>
+            </div>
+
+            <!-- Subtitle -->
+            <h2 class="manrope-font font-bold text-2xl mt-6 text-neutral-800">
+                Oops! This page wandered off.
+            </h2>
+
+            <!-- Small Subtitle -->
+            <p class="manrope-font text-neutral-600 mt-2 max-w-md">
+                Looks like the page you’re searching for took a break (probably
+                a long one). Let’s get you back on track!
+            </p>
+
+            <!-- Button Back Home -->
+            <a
+                href="/"
+                class="mt-8 manrope-font px-6 py-3 text-sm font-semibold bg-neutral-900 text-white rounded-full
+               border-2 border-neutral-900 shadow-[4px_4px_0_#000]
+               hover:shadow-[2px_2px_0_#000] active:shadow-none
+               active:translate-x-1 active:translate-y-1 transition-all"
+            >
+                Go Back Home
+            </a>
+        </div>
+    </body>
+</html>
