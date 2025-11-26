@@ -1,13 +1,7 @@
----
-const { open } = Astro.props;
----
-
 <div
-    class={`fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all z-50 ${
-        open
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
-    }`}
+    id="settings-modal"
+    class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center
+           transition-all z-50 opacity-0 pointer-events-none"
 >
     <div
         class="bg-white border-2 border-neutral-900 shadow-[8px_8px_0_#000] rounded-2xl p-8 w-[90%] max-w-md"
@@ -50,9 +44,29 @@ const { open } = Astro.props;
             id="closeSettings"
             class="mt-6 px-4 py-2 bg-neutral-900 text-white manrope-font rounded-full border-2 border-neutral-900
              shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000] active:shadow-none
-             active:translate-x-1 active:translate-y-1 transition-all"
+             active:translate-x-1 active:translate-y-1 transition-all cursor-pointer"
         >
             Close
         </button>
     </div>
 </div>
+
+<script>
+    import { showSettings, toggleSettings } from '../stores/navbar_toggle';
+
+    const modal = document.getElementById('settings-modal');
+    const closemodal = document.getElementById('closeSettings');
+
+    closemodal?.addEventListener('click', toggleSettings);
+
+    showSettings.subscribe((isOpen) => {
+        console.log(showSettings.get());
+        if (isOpen) {
+            modal?.classList.remove('opacity-0', 'pointer-events-none');
+            modal?.classList.add('opacity-100', 'pointer-events-auto');
+        } else {
+            modal?.classList.add('opacity-0', 'pointer-events-none');
+            modal?.classList.remove('opacity-100', 'pointer-events-auto');
+        }
+    });
+</script>
