@@ -38,8 +38,7 @@
 </div>
 
 <script>
-    let totalSessions = 3;
-    let currentSession = 0;
+    import { sessions, currSessions, updateSessions } from '../stores/sessions';
 
     const totalEl = document.getElementById('totalSessions');
     const currentEl = document.getElementById('currentSession');
@@ -48,21 +47,19 @@
 
     function updateSessionUI() {
         if (!totalEl || !currentEl) return;
-        totalEl.textContent = `${totalSessions}`;
-        currentEl.textContent = `${currentSession}`;
+        totalEl.textContent = sessions.get().toString();
+        currentEl.textContent = currSessions.get().toString();
     }
 
+    sessions.subscribe(updateSessionUI);
+    currSessions.subscribe(updateSessionUI);
+
     incBtn?.addEventListener('click', () => {
-        totalSessions++;
-        updateSessionUI();
+        updateSessions(sessions.get() + 1);
     });
 
     decBtn?.addEventListener('click', () => {
-        if (totalSessions > 1) {
-            totalSessions--;
-            if (currentSession > totalSessions) currentSession = totalSessions;
-            updateSessionUI();
-        }
+        if (sessions.get() > 1) updateSessions(sessions.get() - 1);
     });
     updateSessionUI();
 </script>

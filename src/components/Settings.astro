@@ -1,3 +1,8 @@
+---
+import { workTimer } from '../stores/timer';
+import { showSessions } from '../stores/sessions';
+---
+
 <div
     id="settings-modal"
     class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center
@@ -12,10 +17,12 @@
             <div class="flex justify-between items-center">
                 <span class="font-semibold">Work Duration</span>
                 <input
+                    id="work-duration"
                     type="number"
                     min="1"
                     max="60"
                     class="border-2 border-neutral-900 rounded px-3 py-1 w-20 shadow-[3px_3px_0_#000]"
+                    value={workTimer.get() / 60}
                 />
             </div>
 
@@ -32,10 +39,12 @@
             <div class="flex justify-between items-center">
                 <span class="font-semibold">Sessions</span>
                 <input
+                    id="sessions"
                     type="number"
                     min="1"
                     max="10"
                     class="border-2 border-neutral-900 rounded px-3 py-1 w-20 shadow-[3px_3px_0_#000]"
+                    value={showSessions()}
                 />
             </div>
         </div>
@@ -53,20 +62,41 @@
 
 <script>
     import { showSettings, toggleSettings } from '../stores/navbar_toggle';
+    import { updateTimer, workTimer } from '../stores/timer';
+    import { sessions, updateSessions } from '../stores/sessions';
 
     const modal = document.getElementById('settings-modal');
     const closemodal = document.getElementById('closeSettings');
-
+    const work = document.getElementById(
+        'work-duration'
+    ) as HTMLInputElement | null;
+    const sessionsInput = document.getElementById(
+        'sessions'
+    ) as HTMLInputElement | null;
     closemodal?.addEventListener('click', toggleSettings);
 
     showSettings.subscribe((isOpen) => {
-        console.log(showSettings.get());
         if (isOpen) {
             modal?.classList.remove('opacity-0', 'pointer-events-none');
             modal?.classList.add('opacity-100', 'pointer-events-auto');
+
+            if (work) work.value = (workTimer.get() / 60).toString();
+            if (sessionsInput) sessionsInput.value = sessions.get().toString();
         } else {
             modal?.classList.add('opacity-0', 'pointer-events-none');
             modal?.classList.remove('opacity-100', 'pointer-events-auto');
         }
+    });
+
+    work?.addEventListener('change', (e: any) => {
+        const target = e.target;
+        if (target instanceof HTMLInputElement)
+            updateTimer(Number(target.value));
+    });
+
+    sessionsInput?.addEventListener('change', (e: any) => {
+        const target = e.target;
+        if (target instanceof HTMLInputElement)
+            updateSessions(Number(target.value));
     });
 </script>

@@ -41,3 +41,13 @@ export function resetWorkTimer() {
     workTimer.set(initTimer * 60);
     isRunning.set(false);
 }
+
+export function updateTimer(min: number) {
+    if (intervalId !== null) {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+
+    workTimer.set(min * 60);
+    isRunning.set(false);
+}
